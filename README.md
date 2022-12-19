@@ -8,6 +8,12 @@ In this workshop we are going to build a simple event driven application that pr
 
 At the end of the workshop you should have an understanding of how to build, configure and deploy an AWS serverless application in Kotlin using CDK in Kotlin.
 
+Some useful links on event driven architecture:
+* https://aws.amazon.com/blogs/compute/getting-started-with-event-driven-architecture/
+* https://aws.amazon.com/event-driven-architecture/
+* https://docs.aws.amazon.com/lambda/latest/operatorguide/event-driven-architectures.html
+* https://aws.amazon.com/blogs/compute/building-an-event-driven-application-with-amazon-eventbridge/
+
 ## Instructions
 
 1. [Prerequisites](instructions/1-prerequisites.adoc)

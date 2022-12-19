@@ -1,5 +1,8 @@
 = 3. Add event bus on AWS EventBridge
 
-➡️ link:./4-add-dynamoDB.adoc[2. Write to DynamoDB Table]
+== 3.1 Implement an event
+Event design is important, however this workshop will not be going into that.
+
+➡️ link:./4-add-dynamoDB.adoc[4. Write to DynamoDB Table]
 
 ⬅️ link:./2-generate-workshop-project.adoc[2. Generate and configure a workshop project in GitHub]
