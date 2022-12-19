@@ -33,7 +33,6 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
         val eventBus =
             EventBus.Builder.create(this, "eventBus")
                 .eventBusName("ChristmasEventBus")
-                .eventSourceName("Santa")
                 .build()
 
         //add rule and configure our lambda as target
