@@ -14,6 +14,8 @@ Some useful links on event driven architecture:
 * https://docs.aws.amazon.com/lambda/latest/operatorguide/event-driven-architectures.html
 * https://aws.amazon.com/blogs/compute/building-an-event-driven-application-with-amazon-eventbridge/
 
+Please note, unit and integration tests are not in scope of this workshop. It is a good practice to unit test infrastructure as code as well as unit and integration test the lambda code.
+
 ## Instructions
 
 1. [Prerequisites](instructions/1-prerequisites.adoc)
