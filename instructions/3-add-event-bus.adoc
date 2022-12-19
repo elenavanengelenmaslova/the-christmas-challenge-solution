@@ -1,5 +1,9 @@
 = 3. Add event bus on AWS EventBridge
 
+Here we are going to add EventBridge event bus and event rule with our Lambda as target, so that Lambda gets evoked for every event placed on event bus.
+
+image::images/EventToLambda.png[event-to-lambda]
+
 == 3.1 Implement an event
 First we need to add a data class that will contain event data, and update our lambda handler to receive that data.
 Create package `nl.vintik.workshop.aws.lambda.model` and place EventBridgeMessage data class in that package:

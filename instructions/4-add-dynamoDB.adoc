@@ -1,5 +1,9 @@
 = 4. Write to DynamoDB Table
 
+In this part of the exercise we are going to create a DynamoDB table where we can save our Reindeer payload. Then we need to add permission to our Lambda to write to the new table. Finally, we need to add code to the lambda to save the event payload to the new table.
+
+image::images/LambdaToDynamoDB.png[lambda-to-dynamo]
+
 ➡️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
 
 ⬅️ link:./3-add-event-bus.adoc[3. Add event bus on AWS EventBridge]

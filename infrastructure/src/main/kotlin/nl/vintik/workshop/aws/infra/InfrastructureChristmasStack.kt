@@ -1,8 +1,13 @@
 package nl.vintik.workshop.aws.infra
 
 import software.amazon.awscdk.Duration
+import software.amazon.awscdk.RemovalPolicy
 import software.amazon.awscdk.Stack
 import software.amazon.awscdk.StackProps
+import software.amazon.awscdk.services.dynamodb.Attribute
+import software.amazon.awscdk.services.dynamodb.AttributeType
+import software.amazon.awscdk.services.dynamodb.BillingMode
+import software.amazon.awscdk.services.dynamodb.Table
 import software.amazon.awscdk.services.events.EventBus
 import software.amazon.awscdk.services.events.EventPattern
 import software.amazon.awscdk.services.events.Rule
@@ -43,5 +48,26 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
                 .build())
             .targets(listOf(LambdaFunction(function)))
             .build()
+
+        val tableName = "Reindeer"
+        val reindeerTable = Table.Builder.create(this, tableName)
+            .tableName(tableName)
+            .partitionKey(
+                Attribute.builder()
+                    .type(AttributeType.STRING)
+                    .name("id")
+                    .build()
+            )
+            //Note: for workshop DESTROY setting is good because when we clean up we do not want to retain anything.
+            //On production usually one would use RETAIN or SNAPSHOT so that the data is not lost if the stack is deleted.
+            .removalPolicy(RemovalPolicy.DESTROY)
+            .pointInTimeRecovery(false)
+             //Setting to keep ourselves within the free tier
+            .billingMode(BillingMode.PROVISIONED)
+            .readCapacity(4)
+            .writeCapacity(4)
+            .build()
+
+        reindeerTable.grantWriteData(function)
     }
 }
