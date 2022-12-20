@@ -19,6 +19,7 @@ import software.amazon.awscdk.services.lambda.Function
 import software.amazon.awscdk.services.lambda.Runtime
 import software.amazon.awscdk.services.logs.RetentionDays
 import software.constructs.Construct
+import java.nio.file.Paths
 
 class InfrastructureChristmasStack(scope: Construct, id: String, props: StackProps) : Stack(scope, id, props) {
     init {
@@ -79,7 +80,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
         val apiName = "ReindeerApi"
         val reindeerApi = GraphqlApi.Builder.create(this, apiName)
             .name(apiName)
-            .schema(SchemaFile.fromAsset("schema.graphql"))
+            .schema(SchemaFile.fromAsset(this::class.java.getResource("schema.graphql").path))
             .authorizationConfig(
                 AuthorizationConfig.builder()
                     .defaultAuthorization(
