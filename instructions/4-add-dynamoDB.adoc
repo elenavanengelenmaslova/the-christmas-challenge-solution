@@ -111,20 +111,22 @@ Send Reindeer event again, same as in link:./3-add-event-bus.adoc[section 3]:
 }
 ----
 
-Check event has been processed by Lambda. The lambda log should have a log entry containing Reindeer event payload.
+Check event has been processed by Lambda. The lambda log should have a log entry containing Reindeer event payload:
 
-Then go to DynamoDB service, select `Reindeer` table.
+image::images/LambdaLogPutDynamo.png[lambda-log-put-dynamo]
+
+Now go to DynamoDB service, select `Reindeer` table.
 
 [NOTE]
 ====
-The table item count is not real time, you can perform live item count which scans the whole table. Normally not recommended when tables have a lot of data.
+The table item count is not real time, you can perform live item count which scans the whole table. This is not recommended when tables have a lot of data.
 ====
 
 Select button "Explore table items":
 
 image::images/ExploreTabeItems.png[explore-table-items]
 
-If you do not see your item yet, then press the refresh button:
+Press the refresh button to see your new item in the table:
 
 image::images/RefreshTableItems.png[refresh-table-items]
 
@@ -133,8 +135,6 @@ image::images/RefreshTableItems.png[refresh-table-items]
 ====
 If refresh button is disabled, you may need to refresh the browser page, as any query settings in the query form above disables the refresh button.
 ====
-
-After refreshing your item should appear in the "Items returned" table, see screenshot above.
 
 ➡️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
 

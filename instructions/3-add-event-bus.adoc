@@ -119,7 +119,7 @@ image::images/EventSentSuccess.png[send-success]
 
 Let us now check if Lambda has processed our event.
 
-Go to AWS Lambda service, search for "Christmas" and select Lambda with description `Kotlin Lambda for Christmas`. Then select Monitor tab. You should see your latest log in Recent invocations table, however if the logs are not there yet, select "View in Cloudwatch" button:
+Go to AWS Lambda service, search for "Christmas" and select Lambda with description `Kotlin Lambda for Christmas`. Then select Monitor tab then press "View in Cloudwatch" button. Scroll down to Log streams table and select the latest log:
 
 image::images/FindLogs.png[find-logs]
 
