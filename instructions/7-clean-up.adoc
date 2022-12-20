@@ -1,12 +1,18 @@
 = 7. Clean up resources
 
-Well done! You have completed a workshop of creating an event driven application.
+Well done! You have completed The Christmas Challenge!
+
+[NOTE]
+====
+Please do this step only after we go through the solutions to The Christmas Challenge.
+====
 
 Now it is time to clean up.
 
 image::images/ChristmasClean.png[clean-up]
 
-In order to remove our serverless resources in AWS account go to GitHub actions tab and run "Clean up stack" workflow:
+In order to remove our serverless resources in AWS account go to GitHub\]
+actions tab and run "Clean up stack" workflow:
 
 image::images/Clean-up.png[clean-up]
 
