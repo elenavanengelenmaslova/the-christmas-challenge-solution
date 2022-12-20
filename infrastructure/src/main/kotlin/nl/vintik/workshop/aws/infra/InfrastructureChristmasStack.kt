@@ -63,9 +63,9 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             .removalPolicy(RemovalPolicy.DESTROY)
             .pointInTimeRecovery(false)
              //Setting to keep ourselves within the free tier
-            .billingMode(BillingMode.PAY_PER_REQUEST)
-            //.readCapacity(4)
-            //.writeCapacity(4)
+            .billingMode(BillingMode.PROVISIONED)
+            .readCapacity(12)
+            .writeCapacity(12)
             .build()
 
         reindeerTable.grantWriteData(function)
