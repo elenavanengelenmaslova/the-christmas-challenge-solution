@@ -11,8 +11,8 @@ Now it is time to clean up.
 
 image::images/ChristmasClean.png[clean-up]
 
-In order to remove our serverless resources in AWS account go to GitHub\]
-actions tab and run "Clean up stack" workflow:
+
+In order to remove our serverless resources in AWS account go to GitHub and then Actions tab. Then run "Clean up stack" workflow:
 
 image::images/Clean-up.png[clean-up]
 
