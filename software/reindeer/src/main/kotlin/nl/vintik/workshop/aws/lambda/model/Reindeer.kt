@@ -19,9 +19,9 @@ data class Reindeer(
 )
 {
     companion object {
-        const val TABLE_NAME = "Reindeer"
+        private const val TABLE_NAME = "Reindeer"
 
-        val schema: TableSchema<Reindeer> = TableSchema.fromClass(Reindeer::class.java)
+        private val schema: TableSchema<Reindeer> = TableSchema.fromClass(Reindeer::class.java)
 
         private val dynamoDbAsyncClient: DynamoDbEnhancedAsyncClient = DynamoDbEnhancedAsyncClient.builder()
             .dynamoDbClient(

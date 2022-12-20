@@ -7,6 +7,7 @@ image::images/EventToLambda.png[event-to-lambda]
 == 3.1 Implement an event
 First we need to add a data class that will contain event data, and update our lambda handler to receive that data.
 Create package `nl.vintik.workshop.aws.lambda.model` and place EventBridgeMessage data class in that package:
+
 [source,kotlin]
 ----
 data class EventBridgeMessage <T>(
@@ -19,6 +20,7 @@ data class EventBridgeMessage <T>(
 This is a generic container data class for event bridge events, can be reused.
 
 Add Reindeer data class to the same package, this is our specific event detail data class:
+
 [source,kotlin]
 ----
 data class Reindeer(
@@ -33,6 +35,7 @@ data class Reindeer(
 Note: both data classes have default constructor enabled and are mutable, this is because we are using default serialization mechanism of AWS SDK for java which creates object before it populates it with data.
 
 Now update our Lambda handler `KotlinLambda` to receive event bridge event:
+
 [source,kotlin]
 ----
 class KotlinLambda : RequestHandler<EventBridgeMessage<Reindeer>, String> {
@@ -68,6 +71,7 @@ Now that Lambda code is ready to receive events from EventBridge, we can add inf
 ----
 
 To build the changes locally you can run:
+
 [source,sh]
 ----
 ./gradlew build
@@ -82,6 +86,7 @@ Login to AWS Console and navigate to EventBridge, then under Busses menu on the 
 image::images/SendEventButton.png[send-events-button]
 
 Fill in event entry form. For event bus, select our new `ChristmasEventBus` from the dropdown; fill `Santa` in EventSource field; fill `Reindeer` in Detail type, this field is currently not used in our event rule, but could be also used to filter events. In Event detail fill in the following json which matches our Reindeer data class:
+
 [source,json]
 ----
 {
@@ -97,7 +102,7 @@ Then press the Send button, and you should now see a success page:
 
 image::images/EventSentSuccess.png[send-success]
 
-Let us now check if Lambda has processed our event. Go to AWS Lambda service, search for Christmas and select Lambda with description "Kotlin Lambda for Christmas". Then select Monitor tab. Your should see yoour invocation in Recent invocations table, however if the logs are not there yet, select "View in Cloudwatch button":
+Let us now check if Lambda has processed our event. Go to AWS Lambda service, search for Christmas and select Lambda with description "Kotlin Lambda for Christmas". Then select Monitor tab. Your should see your invocation in Recent invocations table, however if the logs are not there yet, select "View in Cloudwatch button":
 
 image::images/FindLogs.png[find-logs]
 

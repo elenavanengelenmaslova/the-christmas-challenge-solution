@@ -7,6 +7,7 @@ image::images/LambdaToDynamoDB.png[lambda-to-dynamo]
 == 4.1 Add DynamoDB Table in CDK infrastructure
 
 Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack. Configure `id` as partition key, and set provisioned read and write capacity to 4. Free tier allows up to 25 read and write capacity units.
+
 [source,kotlin]
 ----
         val tableName = "Reindeer"
@@ -30,6 +31,85 @@ Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack.
 
         reindeerTable.grantWriteData(function)
 ----
+
+Because in this assignment we are not going to transform the event payload in anyway, we can just reuse the data class `Reindeer` as a database object. We can add AWS SDK DynamoDB enhanced client annotations to it:
+
+[source,kotlin]
+----
+@DynamoDbBean
+data class Reindeer(
+    @get:DynamoDbPartitionKey
+    var id: String = "",
+    var name: String = "",
+    var speed: Int = 0,
+    var skill: String? = null,
+    var description: String? = null
+)
+----
+
+Let us also add schema and table definitions as statics on the same class:
+
+[source,kotlin]
+----
+ companion object {
+        private const val TABLE_NAME = "Reindeer"
+
+        private val schema: TableSchema<Reindeer> = TableSchema.fromClass(Reindeer::class.java)
+
+        private val dynamoDbAsyncClient: DynamoDbEnhancedAsyncClient = DynamoDbEnhancedAsyncClient.builder()
+            .dynamoDbClient(
+                DynamoDbAsyncClient.builder()
+                    .region(Region.EU_WEST_1)
+                    .build()
+            ).build()
+
+        val reindeerTable: DynamoDbAsyncTable<Reindeer> = dynamoDbAsyncClient.table(
+            TABLE_NAME,
+            schema
+        )
+    }
+----
+
+Finally, we need to update the Lambda handler to save event payload to our new table. Please note that normally Lambda handler will not have business logic, but would call a controller that in turn calls one or more services, but for this simple workshop we are just going to update the code in the handler `KotlinLambda:
+
+[source,kotlin]
+----
+    override fun handleRequest(event: EventBridgeMessage<Reindeer>, context: Context): String {
+        //if payload is present, add or replace it in the Reindeer table (put)
+        event.detail?.let {
+            reindeerTable.putItem(it).join()
+            logger.info("Put item $it")
+        }
+        return "Merry Christmas!"
+    }
+----
+
+To build the changes locally you can run:
+
+[source,sh]
+----
+./gradlew build
+----
+
+Now we can commit and push our changes, and then after CI/CI pipeline in github succeeds we can check that event payload is saved to the database.
+
+Send Reindeer event again,same as in link:./3-add-event-bus.adoc[section 3]:
+
+[source,json]
+----
+{
+  "id": "1",
+  "name": "Dasher",
+  "speed": 100,
+  "skill": "Sewing",
+  "description": "He loves to go fast!"
+}
+----
+
+Check event has been processed by lambda, you should see that in the logs:
+
+Then go to DynamoDB service, select `Reindeer` table, find item by id 1. This would display our event payload.
+
 ➡️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
 
 ⬅️ link:./3-add-event-bus.adoc[3. Add event bus on AWS EventBridge]
