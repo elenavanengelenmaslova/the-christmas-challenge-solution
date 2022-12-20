@@ -6,7 +6,7 @@ image::images/LambdaToDynamoDB.png[lambda-to-dynamo]
 
 == 4.1 Add DynamoDB Table in CDK infrastructure
 
-Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack. Configure `id` as partition key, and set provisioned read and write capacity to 4. Free tier allows up to 25 read and write capacity units.
+Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack. Configure `id` as partition key, and set provisioned read and write capacity to 12. Free tier allows up to 25 read and 25 write capacity units.
 
 [source,kotlin]
 ----
@@ -25,14 +25,14 @@ Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack.
             .pointInTimeRecovery(false)
              //Setting to keep ourselves within the free tier
             .billingMode(BillingMode.PROVISIONED)
-            .readCapacity(4)
-            .writeCapacity(4)
+            .readCapacity(12)
+            .writeCapacity(12)
             .build()
 
         reindeerTable.grantWriteData(function)
 ----
 
-Because in this assignment we are not going to transform the event payload in anyway, we can just reuse the data class `Reindeer` as a database object. We can add AWS SDK DynamoDB enhanced client annotations to it:
+Because in this assignment we are not going to transform the event payload in any way, we can just reuse the data class `Reindeer` as a database object. We can add AWS SDK DynamoDB enhanced client annotations to it:
 
 [source,kotlin]
 ----
@@ -106,9 +106,20 @@ Send Reindeer event again,same as in link:./3-add-event-bus.adoc[section 3]:
 }
 ----
 
-Check event has been processed by lambda, you should see that in the logs:
+Check event has been processed by lambda, you should see that in the logs. This should display our event payload:
 
-Then go to DynamoDB service, select `Reindeer` table, find item by id 1. This would display our event payload.
+
+Then go to DynamoDB service, select `Reindeer` table. Please note, the table item count is not real time, you can perform live item count which scans the whole table. Normally not recommended when tables have a lot of data.
+
+Select button "Explore table items":
+
+image::images/ExploreTabeItems.png[explore-table-items]
+
+If you do not yet see your item, then press the refresh button:
+
+image::images/RefreshTableItems.png[refresh-table-items]
+
+Note: if refresh button is disabled, you may need to refresh the browser page, as any query settings in the query form above disables the refresh button.
 
 ➡️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
 
