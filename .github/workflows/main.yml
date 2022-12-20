@@ -5,6 +5,7 @@ on:
     paths-ignore:
       - '**.md'
       - 'instructions/**'
+      - 'instructions/**.adoc'
   workflow_dispatch:
 
 jobs:
