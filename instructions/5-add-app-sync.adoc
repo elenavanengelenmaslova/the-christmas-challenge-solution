@@ -6,6 +6,6 @@ image::images/EventApp.png[lambda-to-dynamo]
 
 For this task we only need to update our infrastructure.
 
-➡️ link:./6-clean-up.adoc[6. Clean up resources]
+➡️ link:./7-clean-up.adoc[6. Clean up resources]
 
 ⬅️ link:./4-add-dynamoDB.adoc[4. Write to DynamoDB Table]

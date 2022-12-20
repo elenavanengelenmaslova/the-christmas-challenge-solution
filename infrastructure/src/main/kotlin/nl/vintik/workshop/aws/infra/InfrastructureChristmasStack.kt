@@ -79,7 +79,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
         val apiName = "ReindeerApi"
         val reindeerApi = GraphqlApi.Builder.create(this, apiName)
             .name(apiName)
-            .schema(SchemaFile.fromAsset("schemas.reindeer.schema.graphql"))
+            .schema(SchemaFile.fromAsset("schemas/reindeer/schema.graphql"))
             .authorizationConfig(
                 AuthorizationConfig.builder()
                     .defaultAuthorization(
