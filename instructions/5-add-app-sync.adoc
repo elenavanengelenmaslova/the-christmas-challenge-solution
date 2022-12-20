@@ -6,7 +6,7 @@ image::images/EventApp.png[lambda-to-dynamo]
 
 For this task we only need to update our infrastructure.
 
-First let us define out graphql schema. In `infrastracture` -> `src` -> `main` create the following `resources` structure:
+First let us define our graphql schema. In `infrastracture` -> `src` -> `main` create the following `resources` structure:
 
 image::images/ResourcesSchemas.png[resources-schemas-graphql]
 
@@ -31,7 +31,7 @@ type Schema {
 }
 ----
 
-Finally, let us update our `InfrastructureChristmasStack` with GraphQL API by adding:
+Finally, let us add GraphQL API to our `InfrastructureChristmasStack`:
 
 [source,kotlin]
 ----
@@ -67,7 +67,7 @@ Finally, let us update our `InfrastructureChristmasStack` with GraphQL API by ad
         )
 ----
 
-We are now good to get, lets commit and push our GraphQL API and check it in AWS Console when it is deployed.
+We are now good to go, let us commit and push our GraphQL API changes and try out the API in AWS Console when it is deployed.
 
 When CI/CD pipeline succeeds, head to AWS console and go to AWS AppSync service. Select ReindeerAPI:
 
