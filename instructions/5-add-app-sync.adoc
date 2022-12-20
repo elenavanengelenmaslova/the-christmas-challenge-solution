@@ -73,11 +73,11 @@ When CI/CD pipeline succeeds, head to AWS console and go to AWS AppSync service.
 
 image::images/ReindeerAPI.png[select-api]
 
-Select `Queries` on the left side menu, then expand `getReindeerById`. Enter id `1` and select fields you would like our query to return. Press play button:
+Select `Queries` on the left side menu, then expand `getReindeerById`. Enter  `1` as id value and select checkboxes next to the fields you would like our GraphQL query to return. Press play button:
 
 image::images/ExecuteQuery.png[execute-query]
 
-You should now our reindeer displayed in the results pane on the right.
+You should now see our reindeer displayed in the results pane on the right.
 
 
 ➡️ link:./6-extra-challenges.adoc[6. Extra challenges]
