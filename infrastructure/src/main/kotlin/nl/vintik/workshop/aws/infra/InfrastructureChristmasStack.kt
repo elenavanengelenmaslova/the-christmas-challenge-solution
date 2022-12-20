@@ -84,6 +84,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
                 AuthorizationConfig.builder()
                     .defaultAuthorization(
                         AuthorizationMode.builder()
+                             //API Key is the simplest authorisation option, good enough for our workshop
                             .authorizationType(AuthorizationType.API_KEY).build()
                     ).build()
             ).logConfig(
@@ -94,7 +95,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             )
             .build()
 
-        reindeerApi.addDynamoDbDataSource("assetLastEntryByLocationOnLocation", reindeerTable).createResolver(
+        reindeerApi.addDynamoDbDataSource("getReindeerById", reindeerTable).createResolver(
             "resolveById",
             BaseResolverProps.builder()
                 .typeName("Query")

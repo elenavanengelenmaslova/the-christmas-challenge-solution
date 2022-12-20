@@ -6,13 +6,13 @@ If you completed the workshop and are looking to do tasks without following step
 
 Enable DynamoDB stream on Reindeer table, process change events with AWS Lambda by comparing what has changed and logging that at Info level. If an existing item has changed, log fields that changed (before and after value).
 
-== 6.2 Add to GraphQL API
+== 6.2 Add another method to GraphQL API
 
 Add another API method that gets Reindeer by name. Hint, you can use DynamoDB global secondary index for this
 
-== 6.3 Use scheduled AWS Lambda
+== 6.3 Use a scheduled AWS Lambda
 
-Schedule a new AWSLambda to run 1 x hour. Lambda should count all the reindeer in Reindeer table and log that on Info level. Eventual consistency is fine here.
+Schedule a new AWSLambda to run 1 x hour. Lambda should count all the reindeer in Reindeer table and log the result on Info level. Eventual consistency is fine here.
 
 
 For this task we only need to update our infrastructure.

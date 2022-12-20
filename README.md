@@ -26,4 +26,5 @@ Performance tuning, unit and integration tests are not in scope of this workshop
 3. [Add event bus](instructions/3-add-event-bus.adoc)
 4. [Add DynamoDB](instructions/4-add-dynamoDB.adoc)
 5. [Add AppSync](instructions/5-add-app-sync.adoc)
-6. [Clean up resources](instructions/7-clean-up.adoc)
+6. [Extra challenges](instructions/6-extra-challenges.adoc)
+7. [Clean up resources](instructions/7-clean-up.adoc)
