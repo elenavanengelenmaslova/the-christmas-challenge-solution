@@ -8,6 +8,11 @@ image::images/LambdaToDynamoDB.png[lambda-to-dynamo]
 
 Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack. Configure `id` as partition key, and set provisioned read and write capacity to 12. Free tier allows up to 25 read and 25 write capacity units.
 
+[NOTE]
+====
+For more information, see link:https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html[Read/write capacity mode]
+====
+
 [source,kotlin]
 ----
         val tableName = "Reindeer"
@@ -32,9 +37,9 @@ Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack.
         reindeerTable.grantWriteData(function)
 ----
 
-Because in this assignment we are not going to transform the event payload in any way, we can just reuse the data class `Reindeer` as a database object. We can add AWS SDK DynamoDB enhanced client annotations to it.
+Because in this assignment we are not going to transform the event payload in any way, we can just reuse the data class `Reindeer` as a database object.
 
-Let us also add schema and table definitions as statics on the same class:
+Let us add AWS SDK DynamoDB enhanced client annotations to it. In addition, let us add schema and table definitions as statics to the same class.
 
 [source,kotlin]
 ----
@@ -68,7 +73,9 @@ data class Reindeer(
 }
 ----
 
-Finally, we need to update the Lambda handler to save event payload to our new table. Please note that normally Lambda handler will not have business logic, but would call a controller that in turn calls one or more services, but for this simple workshop we are just going to update the code in the handler `KotlinLambda:
+Finally, we need to update the Lambda handler to save event payload to our new table.
+
+Normally Lambda handler will not have business logic, but would call a controller that in turn calls one or more services, but for this simple workshop we are just going to update the code in the handler `KotlinLambda`:
 
 [source,kotlin]
 ----
@@ -82,16 +89,16 @@ Finally, we need to update the Lambda handler to save event payload to our new t
     }
 ----
 
-To build the changes locally you can run:
+To build the changes locally you can run in the root of the project:
 
 [source,sh]
 ----
 ./gradlew build
 ----
 
-Now we can commit and push our changes, and then after CI/CI pipeline in github succeeds we can check that event payload is saved to the database.
+Now we can commit and push our changes, and then after CI/CI pipeline in GitHub have succeeded, we can check that event payload has been saved to the database.
 
-Send Reindeer event again,same as in link:./3-add-event-bus.adoc[section 3]:
+Send Reindeer event again, same as in link:./3-add-event-bus.adoc[section 3]:
 
 [source,json]
 ----
@@ -104,8 +111,7 @@ Send Reindeer event again,same as in link:./3-add-event-bus.adoc[section 3]:
 }
 ----
 
-Check event has been processed by lambda, you should see that in the logs. This should display our event payload:
-
+Check event has been processed by Lambda. The lambda log should have a log entry containing Reindeer event payload.
 
 Then go to DynamoDB service, select `Reindeer` table.
 
