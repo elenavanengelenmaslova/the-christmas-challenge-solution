@@ -8,10 +8,8 @@ image::images/LambdaToDynamoDB.png[lambda-to-dynamo]
 
 Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack. Configure `id` as partition key, and set provisioned read and write capacity to 12. Free tier allows up to 25 read and 25 write capacity units.
 
-[NOTE]
-====
-For more information, see link:https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html[Read/write capacity mode]
-====
+
+NOTE: For more information, see link:https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html[Read/write capacity mode]
 
 [source,kotlin]
 ----
@@ -117,10 +115,8 @@ image::images/LambdaLogPutDynamo.png[lambda-log-put-dynamo]
 
 Now go to DynamoDB service, select `Reindeer` table.
 
-[NOTE]
-====
-The table item count is not real time, you can perform live item count which scans the whole table. This is not recommended when tables have a lot of data.
-====
+NOTE: The table item count is not real time, you can perform live item count which scans the whole table. This is not recommended when tables have a lot of data.
+
 
 Select button "Explore table items":
 
@@ -131,10 +127,8 @@ Press the refresh button to see your new item in the table:
 image::images/RefreshTableItems.png[refresh-table-items]
 
 
-[NOTE]
-====
-If refresh button is disabled, you may need to refresh the browser page, as any query settings in the query form above disables the refresh button.
-====
+NOTE: If refresh button is disabled, you may need to refresh the browser page, as any query settings in the query form above disables the refresh button.
+
 
 ➡️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
 

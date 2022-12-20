@@ -33,10 +33,7 @@ data class Reindeer(
 )
 ----
 
-[NOTE]
-====
-Both data classes have default constructor enabled and are mutable, this is because we are using default serialization mechanism of AWS SDK for java which creates object before it populates it with data.
-====
+NOTE: Both data classes have default constructor enabled and are mutable, this is because we are using default serialization mechanism of AWS SDK for java which creates object before it populates it with data.
 
 Now update our Lambda handler `KotlinLambda` to receive event bridge event:
 
