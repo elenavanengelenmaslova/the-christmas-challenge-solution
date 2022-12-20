@@ -19,4 +19,4 @@ For this task we only need to update our infrastructure.
 
 ➡️ link:./7-clean-up.adoc[6. Clean up resources]
 
-⬅️ link:./4-add-dynamoDB.adoc[4. Write to DynamoDB Table]
+⬅️ link:./5-add-app-sync.adoc[4. Add AppSync GraphQL API]

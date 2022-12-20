@@ -32,7 +32,9 @@ Add a DynamoDB table `Reindeer` to our `InfrastructureChristmasStack` CDK stack.
         reindeerTable.grantWriteData(function)
 ----
 
-Because in this assignment we are not going to transform the event payload in any way, we can just reuse the data class `Reindeer` as a database object. We can add AWS SDK DynamoDB enhanced client annotations to it:
+Because in this assignment we are not going to transform the event payload in any way, we can just reuse the data class `Reindeer` as a database object. We can add AWS SDK DynamoDB enhanced client annotations to it.
+
+Let us also add schema and table definitions as statics on the same class:
 
 [source,kotlin]
 ----
@@ -45,13 +47,8 @@ data class Reindeer(
     var skill: String? = null,
     var description: String? = null
 )
-----
-
-Let us also add schema and table definitions as statics on the same class:
-
-[source,kotlin]
-----
- companion object {
+{
+    companion object {
         private const val TABLE_NAME = "Reindeer"
 
         private val schema: TableSchema<Reindeer> = TableSchema.fromClass(Reindeer::class.java)
@@ -68,6 +65,7 @@ Let us also add schema and table definitions as statics on the same class:
             schema
         )
     }
+}
 ----
 
 Finally, we need to update the Lambda handler to save event payload to our new table. Please note that normally Lambda handler will not have business logic, but would call a controller that in turn calls one or more services, but for this simple workshop we are just going to update the code in the handler `KotlinLambda:
@@ -109,13 +107,18 @@ Send Reindeer event again,same as in link:./3-add-event-bus.adoc[section 3]:
 Check event has been processed by lambda, you should see that in the logs. This should display our event payload:
 
 
-Then go to DynamoDB service, select `Reindeer` table. Please note, the table item count is not real time, you can perform live item count which scans the whole table. Normally not recommended when tables have a lot of data.
+Then go to DynamoDB service, select `Reindeer` table.
+
+[NOTE]
+====
+The table item count is not real time, you can perform live item count which scans the whole table. Normally not recommended when tables have a lot of data.
+====
 
 Select button "Explore table items":
 
 image::images/ExploreTabeItems.png[explore-table-items]
 
-If you do not yet see your item, then press the refresh button:
+If you do not see your item yet, then press the refresh button:
 
 image::images/RefreshTableItems.png[refresh-table-items]
 

@@ -17,4 +17,4 @@ actions tab and run "Clean up stack" workflow:
 image::images/Clean-up.png[clean-up]
 
 
-⬅️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
+⬅️ link:./6-extra-challenges.adoc[6. Extra challenges]

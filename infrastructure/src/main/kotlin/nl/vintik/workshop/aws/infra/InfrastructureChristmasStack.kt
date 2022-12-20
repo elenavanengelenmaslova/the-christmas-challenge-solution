@@ -95,6 +95,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             )
             .build()
 
+        // This is a resolver definition for our GraphQL query
         reindeerApi.addDynamoDbDataSource("getReindeerById", reindeerTable).createResolver(
             "resolveById",
             BaseResolverProps.builder()
