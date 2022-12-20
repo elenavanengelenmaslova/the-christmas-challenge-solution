@@ -4,6 +4,7 @@ Kotlin + AWS serverless workshop
 ## Architecture
 
 In this workshop we are going to build a simple event driven application that processes events on event bridge with AWS Lambda; saves the result in DynamoDB NoSQL database; and exposes the data via GraphQL through AWS AppSync:
+
 ![event-app](instructions/images/EventApp.png)
 
 At the end of the workshop you should have an understanding of how to build, configure and deploy an AWS serverless application in Kotlin using CDK in Kotlin.
@@ -14,10 +15,7 @@ Some useful links on event driven architecture:
 * https://docs.aws.amazon.com/lambda/latest/operatorguide/event-driven-architectures.html
 * https://aws.amazon.com/blogs/compute/building-an-event-driven-application-with-amazon-eventbridge/
 
-[NOTE]
-====
-Performance tuning, unit and integration tests are not in scope of this workshop.
-====
+> **_NOTE:_** Performance tuning, unit and integration tests are not in scope of this workshop.
 
 ## Instructions
 
