@@ -69,7 +69,7 @@ Finally, let us add GraphQL API to our `InfrastructureChristmasStack`:
 
 We are now good to go, let us commit and push our GraphQL API changes and try out the API in AWS Console when it is deployed.
 
-When CI/CD pipeline succeeds, head to AWS console and go to AWS AppSync service. Select ReindeerAPI:
+When CI/CD pipeline succeeds, head to AWS console and go to AWS AppSync service. Select ReindeerApi:
 
 image::images/ReindeerAPI.png[select-api]
 
