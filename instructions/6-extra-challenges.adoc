@@ -8,14 +8,12 @@ Enable DynamoDB stream on Reindeer table, process change events with AWS Lambda 
 
 == 6.2 Add another method to GraphQL API
 
-Add another API method that gets Reindeer by name. Hint, you can use DynamoDB global secondary index for this
+Add another API method that gets Reindeer by name. Hint, you can use DynamoDB global secondary index for this.
 
 == 6.3 Use a scheduled AWS Lambda
 
-Schedule a new AWSLambda to run 1 x hour. Lambda should count all the reindeer in Reindeer table and log the result on Info level. Eventual consistency is fine here.
+Schedule a new AWS Lambda to run 1 x hour. Lambda should count all the reindeer in Reindeer table and log the result on Info level. Eventual consistency is fine here.
 
-
-For this task we only need to update our infrastructure.
 
 ➡️ link:./7-clean-up.adoc[7. Clean up resources]
 
