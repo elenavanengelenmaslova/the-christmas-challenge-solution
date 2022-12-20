@@ -119,7 +119,13 @@ If you do not yet see your item, then press the refresh button:
 
 image::images/RefreshTableItems.png[refresh-table-items]
 
-Note: if refresh button is disabled, you may need to refresh the browser page, as any query settings in the query form above disables the refresh button.
+
+[NOTE]
+====
+If refresh button is disabled, you may need to refresh the browser page, as any query settings in the query form above disables the refresh button.
+====
+
+After refreshing your item should appear in the "Items returned" table, see screenshot above.
 
 ➡️ link:./5-add-app-sync.adoc[5. Add AppSync configuration for GraphQL]
 

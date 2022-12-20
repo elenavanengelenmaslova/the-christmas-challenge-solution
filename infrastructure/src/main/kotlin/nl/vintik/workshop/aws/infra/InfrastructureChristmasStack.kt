@@ -4,6 +4,7 @@ import software.amazon.awscdk.Duration
 import software.amazon.awscdk.RemovalPolicy
 import software.amazon.awscdk.Stack
 import software.amazon.awscdk.StackProps
+import software.amazon.awscdk.services.appsync.alpha.*
 import software.amazon.awscdk.services.dynamodb.Attribute
 import software.amazon.awscdk.services.dynamodb.AttributeType
 import software.amazon.awscdk.services.dynamodb.BillingMode
@@ -43,12 +44,16 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
         //add rule and configure our lambda as target
         Rule.Builder.create(this, "eventRule")
             .eventBus(eventBus)
-            .eventPattern(EventPattern.builder()
-                .source(listOf("Santa"))
-                .build())
+            .description("${eventBus.eventBusName} Rule with Lambda target")
+            .eventPattern(
+                EventPattern.builder()
+                    .source(listOf("Santa"))
+                    .build()
+            )
             .targets(listOf(LambdaFunction(function)))
             .build()
 
+        //Add DynamoDB table to store Reindeers
         val tableName = "Reindeer"
         val reindeerTable = Table.Builder.create(this, tableName)
             .tableName(tableName)
@@ -62,12 +67,40 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             //On production usually one would use RETAIN or SNAPSHOT so that the data is not lost if the stack is deleted.
             .removalPolicy(RemovalPolicy.DESTROY)
             .pointInTimeRecovery(false)
-             //Setting to keep ourselves within the free tier
+            //Setting to keep ourselves within the free tier
             .billingMode(BillingMode.PROVISIONED)
             .readCapacity(12)
             .writeCapacity(12)
             .build()
 
         reindeerTable.grantWriteData(function)
+
+        //Add GraphQL API to get Reindeers
+        val apiName = "ReindeerApi"
+        val reindeerApi = GraphqlApi.Builder.create(this, apiName)
+            .name(apiName)
+            .schema(SchemaFile.fromAsset("schemas.reindeer.schema.graphql"))
+            .authorizationConfig(
+                AuthorizationConfig.builder()
+                    .defaultAuthorization(
+                        AuthorizationMode.builder()
+                            .authorizationType(AuthorizationType.API_KEY).build()
+                    ).build()
+            ).logConfig(
+                LogConfig
+                    .builder()
+                    .fieldLogLevel(FieldLogLevel.ERROR)
+                    .build()
+            )
+            .build()
+
+        reindeerApi.addDynamoDbDataSource("assetLastEntryByLocationOnLocation", reindeerTable).createResolver(
+            "resolveById",
+            BaseResolverProps.builder()
+                .typeName("Query")
+                .fieldName("getReindeerById")
+                .requestMappingTemplate(MappingTemplate.dynamoDbGetItem("id", "id"))
+                .build()
+        )
     }
 }
