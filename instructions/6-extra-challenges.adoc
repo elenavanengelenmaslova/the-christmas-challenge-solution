@@ -17,6 +17,6 @@ Schedule a new AWSLambda to run 1 x hour. Lambda should count all the reindeer i
 
 For this task we only need to update our infrastructure.
 
-➡️ link:./7-clean-up.adoc[6. Clean up resources]
+➡️ link:./7-clean-up.adoc[7. Clean up resources]
 
-⬅️ link:./5-add-app-sync.adoc[4. Add AppSync GraphQL API]
+⬅️ link:./5-add-app-sync.adoc[5. Add AppSync GraphQL API]
