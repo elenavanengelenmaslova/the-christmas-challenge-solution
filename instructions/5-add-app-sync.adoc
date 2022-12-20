@@ -69,6 +69,16 @@ Finally, let us update our `InfrastructureChristmasStack` with GraphQL API by ad
 
 We are now good to get, lets commit and push our GraphQL API and check it in AWS Console when it is deployed.
 
+When CI/CD pipeline succeeds, head to AWS console and go to AWS AppSync service. Select ReindeerAPI:
+
+image::images/ReindeerAPI.png[select-api]
+
+Select `Queries` on the left side menu, then expand `getReindeerById`. Enter id `1` and select fields you would like our query to return. Press play button:
+
+image::images/ExecuteQuery.png[execute-query]
+
+You should now our reindeer displayed in the results pane on the right.
+
 
 ➡️ link:./7-clean-up.adoc[6. Clean up resources]
 
