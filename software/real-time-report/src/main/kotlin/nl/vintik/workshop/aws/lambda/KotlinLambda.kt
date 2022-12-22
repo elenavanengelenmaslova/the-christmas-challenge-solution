@@ -14,11 +14,13 @@ class KotlinLambda : RequestHandler<DynamodbEvent, String> {
             logger.info(
                 "eventName: ${it.eventName}"
             )
+            //check its a modify event and then compare oldImage to newImage
             if (it.eventName == "MODIFY") {
                 it.dynamodb.oldImage.map { (key, oldValue) ->
-                    if (oldValue != it.dynamodb.newImage[key]) logger.info(
-                        "old: ${it.dynamodb.oldImage[key]} | new: ${it.dynamodb.newImage[key]}"
-                    )
+                    if (oldValue != it.dynamodb.newImage[key])
+                        logger.info(
+                            "old: ${it.dynamodb.oldImage[key]} | new: ${it.dynamodb.newImage[key]}"
+                        )
                 }
             }
         }
