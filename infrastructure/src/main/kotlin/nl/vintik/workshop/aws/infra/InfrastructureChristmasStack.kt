@@ -121,9 +121,34 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
         realTimeReportFunction.addEventSource(
             DynamoEventSource.Builder
                 .create(reindeerTable)
-                 //process all event data
+                //process all event data
                 .startingPosition(StartingPosition.TRIM_HORIZON)
                 .batchSize(1)
+                .build()
+        )
+
+        //Task 6.2. Create GSI to table
+        reindeerTable.addGlobalSecondaryIndex(
+            GlobalSecondaryIndexProps.builder()
+                .indexName("reindeer-name-index")
+                .partitionKey(
+                    Attribute.builder()
+                        .name("name")
+                        .type(AttributeType.STRING)
+                        .build()
+                )
+                .projectionType(ProjectionType.ALL)
+                .build()
+        )
+
+        // Task 6.2. Add resolver to GraphQl
+        reindeerApi.addDynamoDbDataSource("getReindeerByName", reindeerTable).createResolver(
+            "resolveByName",
+            BaseResolverProps.builder()
+                .typeName("Query")
+                .fieldName("getReindeerByName")
+                .requestMappingTemplate(MappingTemplate.dynamoDbQuery(KeyCondition.eq("name", "name")))
+                .responseMappingTemplate(MappingTemplate.dynamoDbResultItem())
                 .build()
         )
 
