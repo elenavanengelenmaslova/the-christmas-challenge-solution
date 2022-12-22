@@ -15,9 +15,8 @@ class KotlinLambda : RequestHandler<DynamodbEvent, String> {
                 "eventName: ${it.eventName}"
             )
             if (it.eventName == "MODIFY") {
-                val difference = it.dynamodb.newImage.minus(it.dynamodb.oldImage)
-                difference.map { (key, _) ->
-                    logger.info(
+                it.dynamodb.oldImage.map { (key, oldValue) ->
+                    if (oldValue != it.dynamodb.newImage[key]) logger.info(
                         "old: ${it.dynamodb.oldImage[key]} | new: ${it.dynamodb.newImage[key]}"
                     )
                 }
