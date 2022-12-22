@@ -8,7 +8,7 @@ type Reindeer {
 
 type Query {
     getReindeerById(id: String!): Reindeer
-    getReindeerByName(name: String!): Reindeer
+    getReindeerByName(name: String!): [Reindeer]
 }
 
 type Schema {
