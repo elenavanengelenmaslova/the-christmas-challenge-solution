@@ -152,11 +152,11 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
                     MappingTemplate.fromString(
                         "{\n" +
                                 "    \"version\": \"2017-02-28\",\n" +
-                                "    \"operation\": “Query”,\n" +
-                                "    “query”: {\n" +
-                                "        “expression” : “name = :name” ,\n" +
-                                "        “expressionValues” : {\n" +
-                                "                  “:name”:  \$util.dynamodb.toDynamoDBJson(\$ctx.args.name)\n" +
+                                "    \"operation\": \"Query\",\n" +
+                                "    \"query\": {\n" +
+                                "        \"expression\" : \"name = :name\" ,\n" +
+                                "        \"expressionValues\" : {\n" +
+                                "                  \":name\":  \$util.dynamodb.toDynamoDBJson(\$ctx.args.name)\n" +
                                 "         }\n" +
                                 "    }\n" +
                                 "}"
