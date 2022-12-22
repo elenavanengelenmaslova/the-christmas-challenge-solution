@@ -10,7 +10,6 @@
 rootProject.name = "the-christmas-challenge-solution"
 include(":reindeer")
 project(":reindeer").projectDir = file("software/reindeer")
-// Task 6.1. Add new module for DynamoDB stream processing lambda
 include(":real-time-report")
 project(":real-time-report").projectDir = file("software/real-time-report")
 

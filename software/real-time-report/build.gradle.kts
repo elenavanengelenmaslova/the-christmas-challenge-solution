@@ -1,6 +1,5 @@
 
 dependencies {
-    implementation("software.amazon.awssdk:dynamodb-enhanced:2.18.24")
     implementation("com.amazonaws:aws-lambda-java-core:1.2.2")
     implementation("com.amazonaws:aws-lambda-java-events:3.11.0")
     implementation("org.slf4j:slf4j-api:2.0.5")

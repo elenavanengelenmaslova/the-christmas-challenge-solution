@@ -110,7 +110,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             .description("Kotlin Lambda for Christmas")
             .handler("nl.vintik.workshop.aws.lambda.KotlinLambda::handleRequest")
             .runtime(Runtime.JAVA_11)
-            .code(Code.fromAsset("../build/dist/function.zip"))
+            .code(Code.fromAsset("../build/dist/real-time-report.zip"))
             .architecture(Architecture.ARM_64)
             .logRetention(RetentionDays.ONE_WEEK)
             .memorySize(512)
