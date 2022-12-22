@@ -148,7 +148,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             BaseResolverProps.builder()
                 .typeName("Query")
                 .fieldName("getReindeerByName")
-                .requestMappingTemplate(MappingTemplate.dynamoDbQuery(KeyCondition.ge("name", "name"), "reindeer-name-index"))
+                .requestMappingTemplate(MappingTemplate.dynamoDbQuery(KeyCondition.eq("name", "name"), "reindeer-name-index"))
                 .responseMappingTemplate(MappingTemplate.dynamoDbResultList())
                 .build()
         )
