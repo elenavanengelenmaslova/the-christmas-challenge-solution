@@ -10,12 +10,18 @@ class KotlinLambda : RequestHandler<DynamodbEvent, String> {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun handleRequest(event: DynamodbEvent, context: Context): String {
-        context.logger.log("event records : ${event.records.size}")
-        logger.info("Processing event with no records: ${event.records.size}")
         event.records.map {
             logger.info(
                 "eventName: ${it.eventName}"
             )
+            if (it.eventName == "MODIFY") {
+                val difference = it.dynamodb.newImage.minus(it.dynamodb.oldImage)
+                difference.map { (key, _) ->
+                    logger.info(
+                        "old: ${it.dynamodb.oldImage[key]} | new: ${it.dynamodb.newImage[key]}"
+                    )
+                }
+            }
         }
         return "DynamoDB event!"
     }
