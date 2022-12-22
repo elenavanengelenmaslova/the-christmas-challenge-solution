@@ -5,7 +5,6 @@ import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedAsyncClient
 import software.amazon.awssdk.enhanced.dynamodb.TableSchema
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean
 import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey
-import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbSecondaryPartitionKey
 import software.amazon.awssdk.regions.Region
 import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient
 
@@ -13,11 +12,6 @@ import software.amazon.awssdk.services.dynamodb.DynamoDbAsyncClient
 data class Reindeer(
     @get:DynamoDbPartitionKey
     var id: String = "",
-    @get:DynamoDbSecondaryPartitionKey(indexNames = ["reindeer-name-index"])
-    var name: String = "",
-    var speed: Int = 0,
-    var skill: String? = null,
-    var description: String? = null
 ) {
     companion object {
         private const val TABLE_NAME = "Reindeer"

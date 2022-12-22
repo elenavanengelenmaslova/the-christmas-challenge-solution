@@ -10,6 +10,10 @@
 rootProject.name = "the-christmas-challenge-solution"
 include(":reindeer")
 project(":reindeer").projectDir = file("software/reindeer")
+include(":real-time-report")
+project(":real-time-report").projectDir = file("software/real-time-report")
+include(":scheduled-report")
+project(":scheduled-report").projectDir = file("software/scheduled-report")
 
 include(":infrastructure")
 project(":infrastructure").projectDir = file("infrastructure")
