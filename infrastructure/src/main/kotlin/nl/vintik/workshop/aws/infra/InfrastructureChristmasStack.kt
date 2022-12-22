@@ -165,6 +165,8 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             .timeout(Duration.seconds(120))
             .build()
 
+        reindeerTable.grantWriteData(scheduledReportFunction)
+
         val ruleName = "reportSchedule"
         Rule.Builder.create(this, ruleName)
             .ruleName(ruleName)
