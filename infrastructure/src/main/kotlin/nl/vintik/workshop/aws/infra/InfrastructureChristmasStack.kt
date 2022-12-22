@@ -9,6 +9,7 @@ import software.amazon.awscdk.services.dynamodb.*
 import software.amazon.awscdk.services.events.EventBus
 import software.amazon.awscdk.services.events.EventPattern
 import software.amazon.awscdk.services.events.Rule
+import software.amazon.awscdk.services.events.Schedule
 import software.amazon.awscdk.services.events.targets.LambdaFunction
 import software.amazon.awscdk.services.lambda.*
 import software.amazon.awscdk.services.lambda.Function
@@ -107,7 +108,7 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
 
         //Task 6.1. Create lambda to process DynamoDB Stream
         val realTimeReportFunction = Function.Builder.create(this, "real-time-report-lambda")
-            .description("Kotlin Lambda for Christmas")
+            .description("Real time report for Christmas")
             .handler("nl.vintik.workshop.aws.lambda.KotlinLambda::handleRequest")
             .runtime(Runtime.JAVA_11)
             .code(Code.fromAsset("../build/dist/real-time-report.zip"))
@@ -147,10 +148,29 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
             BaseResolverProps.builder()
                 .typeName("Query")
                 .fieldName("getReindeerByName")
-                .requestMappingTemplate(MappingTemplate.dynamoDbQuery(KeyCondition.eq("name", "name"), "reindeer-name-index"))
+                .requestMappingTemplate(MappingTemplate.dynamoDbQuery(KeyCondition.ge("name", "name"), "reindeer-name-index"))
                 .responseMappingTemplate(MappingTemplate.dynamoDbResultList())
                 .build()
         )
 
+        //Task 6.3. Add scheduled report
+        val scheduledReportFunction = Function.Builder.create(this, "scheduled-report-lambda")
+            .description("Scheduled Report for Christmas Challenge")
+            .handler("nl.vintik.workshop.aws.lambda.KotlinLambda::handleRequest")
+            .runtime(Runtime.JAVA_11)
+            .code(Code.fromAsset("../build/dist/scheduled-report.zip"))
+            .architecture(Architecture.ARM_64)
+            .logRetention(RetentionDays.ONE_WEEK)
+            .memorySize(512)
+            .timeout(Duration.seconds(120))
+            .build()
+
+        val ruleName = "reportSchedule"
+        Rule.Builder.create(this, ruleName)
+            .ruleName(ruleName)
+            .description("Scheduled for Christmas Challenge")
+            .schedule(Schedule.expression("cron(0 * * * ? *)"))
+            .targets(listOf(LambdaFunction(scheduledReportFunction)))
+            .build()
     }
 }
