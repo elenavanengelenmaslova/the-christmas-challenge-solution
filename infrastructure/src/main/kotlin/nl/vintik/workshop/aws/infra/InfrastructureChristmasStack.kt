@@ -154,11 +154,13 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
                                 "    \"version\": \"2017-02-28\",\n" +
                                 "    \"operation\": \"Query\",\n" +
                                 "    \"query\": {\n" +
-                                "        \"expression\" : \":nameKey = :name\" ,\n" +
+                                "        \"expression\" : \"#nameKey = :name\" ,\n" +
                                 "        \"expressionValues\" : {\n" +
-                                "                  \":nameKey\":  \$util.dynamodb.toDynamoDBJson(\"name\")," +
-                                "                  \":name\":  \$util.dynamodb.toDynamoDBJson(\$ctx.args.name)\n" +
+                                "           \":name\":  \$util.dynamodb.toDynamoDBJson(\$ctx.args.name)\n" +
                                 "         }\n" +
+                                "\"expressionNames\" : {\n" +
+                                "           \"#nameKey\" : \"name\"\n" +
+                                "       }"+
                                 "    }\n" +
                                 "}"
                     )
