@@ -10,7 +10,12 @@ class KotlinLambda : RequestHandler<DynamodbEvent, String> {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     override fun handleRequest(event: DynamodbEvent, context: Context): String {
-        event.records.map { logger.info(it.eventName) }
+        logger.info("Processing event with no records: ${event.records.size}")
+        event.records.map {
+            logger.info(
+                "eventName: ${it.eventName}"
+            )
+        }
         return "DynamoDB event!"
     }
 }
