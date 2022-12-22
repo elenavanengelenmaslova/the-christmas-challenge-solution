@@ -4,7 +4,8 @@ on:
 
 jobs:
   build:
-    name: Build Artefacts, the are needed for delete https://github.com/aws/aws-cdk/issues/20060
+    name: Prep Artefacts
+    # Artefacts are needed for destroy https://github.com/aws/aws-cdk/issues/20060
     runs-on: ubuntu-latest
 
     steps:
@@ -39,9 +40,10 @@ jobs:
           retention-days: 1
 
   destroy:
-    name: Build CDK Codebase
+    name: Destroy CDK Codebase
     runs-on: ubuntu-latest
     needs: [ build ]
+
     steps:
       - name: Download Artifacts
         uses: actions/download-artifact@v2
