@@ -85,5 +85,4 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/infrastructure
           npm install -g aws-cdk
-          cdk init
           cdk deploy -vv --require-approval never --all
