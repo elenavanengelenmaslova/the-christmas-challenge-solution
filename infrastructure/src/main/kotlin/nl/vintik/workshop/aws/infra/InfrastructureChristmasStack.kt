@@ -156,14 +156,14 @@ class InfrastructureChristmasStack(scope: Construct, id: String, props: StackPro
                                 "    \"query\": {\n" +
                                 "        \"expression\" : \":nameKey = :name\" ,\n" +
                                 "        \"expressionValues\" : {\n" +
-                                "                  \":nameKey\":  \"name\"" +
+                                "                  \":nameKey\":  \"name\"," +
                                 "                  \":name\":  \$util.dynamodb.toDynamoDBJson(\$ctx.args.name)\n" +
                                 "         }\n" +
                                 "    }\n" +
                                 "}"
                     )
                 )
-                .responseMappingTemplate(MappingTemplate.dynamoDbResultItem())
+                .responseMappingTemplate(MappingTemplate.dynamoDbResultList())
                 .build()
         )
 
