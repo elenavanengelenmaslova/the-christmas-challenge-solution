@@ -6,7 +6,14 @@ image::images/EventApp.png[lambda-to-dynamo]
 
 For this task we only need to update our infrastructure.
 
-First let us define our graphql schema. In `infrastracture` -> `src` -> `main` create the following `resources` structure:
+Let's first add a GraphQL CDK dependency to the gradle build file `build.gradle.kts` in `infrastructure` folder :
+
+[source,kotlin]
+----
+implementation("software.amazon.awscdk:appsync-alpha:2.55.1-alpha.0")
+----
+
+Then let us define our graphql schema. In `infrastracture` -> `src` -> `main` create the following `resources` structure:
 
 image::images/ResourcesSchemas.png[resources-schemas-graphql]
 
