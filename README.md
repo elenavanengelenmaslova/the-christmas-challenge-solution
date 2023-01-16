@@ -1,5 +1,5 @@
-# the-christmas-challenge
-Kotlin + AWS serverless workshop
+# the-christmas-challenge-solution
+Kotlin + AWS serverless workshop solution to https://github.com/elenavanengelenmaslova/the-christmas-challenge
 
 ## Architecture
 
